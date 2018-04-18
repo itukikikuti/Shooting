@@ -42,7 +42,7 @@ int MAIN()
     Sprite player(L"player.png");
     player.scale = 2.0f;
 
-    const int enemyNum = 500;
+    const int enemyNum = 300;
 
     Sprite enemy(L"enemy.png");
     enemy.scale = 2.0f;
