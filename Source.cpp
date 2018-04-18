@@ -1,3 +1,4 @@
+#include <string>
 #include "XLibrary11.hpp"
 using namespace std;
 using namespace DirectX;
@@ -59,9 +60,15 @@ int MAIN()
     Float3 bulletPosition[bulletNum];
     float bulletRadian[bulletNum];
 
-    Text titleText(L"シューティング", 32);
+    Text titleText(L"シューティング", 32.0f);
     titleText.scale = 2.0f;
     titleText.color = Float4(0.0f, 1.0f, 1.0f, 1.0f);
+
+    int score = 0;
+
+    Text scoreText(L"0", 10.0f);
+    scoreText.scale = 10.0f;
+    scoreText.color = Float4(0.0f, 1.0f, 1.0f, 1.0f);
 
     while (App::Refresh())
     {
@@ -74,6 +81,8 @@ int MAIN()
             if (App::GetKeyDown(VK_LBUTTON))
             {
                 player.position = 0.0f;
+                score = 0;
+                scoreText.Create(L"0", 10.0f);
 
                 for (int i = 0; i < enemyNum; i++)
                 {
@@ -92,6 +101,9 @@ int MAIN()
             camera.position = 0.0f;
 
             titleText.Draw();
+
+            scoreText.position = Float3(0.0f, 200.0f, 0.0f);
+            scoreText.Draw();
 
             break;
 
@@ -144,6 +156,8 @@ int MAIN()
                     if (IsHit(enemyPosition[i], bulletPosition[j], hitRange))
                     {
                         enemyPosition[i] = camera.position + GetRandomPosition();
+                        score++;
+                        scoreText.Create(to_wstring(score), 10.0f);
                     }
                 }
 
@@ -162,6 +176,9 @@ int MAIN()
                 bullet.position = bulletPosition[i];
                 bullet.Draw();
             }
+
+            scoreText.position = camera.position + Float3(0.0f, 200.0f, 0.0f);
+            scoreText.Draw();
 
             break;
         }
