@@ -1,7 +1,6 @@
 #include <string>
 #include "XLibrary11.hpp"
 using namespace std;
-using namespace DirectX;
 using namespace XLibrary11;
 
 enum Mode
@@ -43,6 +42,7 @@ int MAIN()
     player.scale = 2.0f;
 
     const int enemyNum = 300;
+	const float enemySpeed = 1.0f;
 
     Sprite enemy(L"enemy.png");
     enemy.scale = 2.0f;
@@ -78,7 +78,7 @@ int MAIN()
         {
         case Title:
 
-            if (App::GetKeyDown(VK_LBUTTON))
+            if (App::GetKeyDown(VK_RETURN))
             {
                 player.position = 0.0f;
                 score = 0;
@@ -148,7 +148,7 @@ int MAIN()
             for (int i = 0; i < enemyNum; i++)
             {
                 float enemyRadian = atan2f(player.position.y - enemyPosition[i].y, player.position.x - enemyPosition[i].x);
-                enemyPosition[i] += Float3(cosf(enemyRadian), sinf(enemyRadian), 0.0f);
+                enemyPosition[i] += Float3(cosf(enemyRadian), sinf(enemyRadian), 0.0f) * enemySpeed;
 
                 float hitRange = enemy.GetSize().x / 2.0f * enemy.scale.x;
                 for (int j = 0; j < bulletNum; j++)

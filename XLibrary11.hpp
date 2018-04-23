@@ -36,6 +36,8 @@
 namespace XLibrary11
 {
 
+using namespace DirectX;
+
 #define MAIN() APIENTRY wWinMain(HINSTANCE, HINSTANCE, LPWSTR, int)
 
 struct Float2 : public DirectX::XMFLOAT2
@@ -916,7 +918,7 @@ private:
         return frequency;
     }
 };
-
+	 
     App() = delete;
     static bool Refresh()
     {
